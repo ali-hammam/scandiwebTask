@@ -1,0 +1,66 @@
+<?php
+namespace Commands\classFormat;
+error_reporting(E_ALL ^ E_WARNING);
+require_once ('makeCommands.php');
+include 'config.php';
+require_once (ROOT.'/Nesc/Commands/Migrations/Drop.php');
+require_once __DIR__."/../Command.php";
+
+use Commands\Migrations\Drop;
+use makeCommands;
+
+class Maker implements \Commands\Command
+{
+    use makeCommands;
+    //public $type; // make-drop
+    public $mmcType; //model migration controller
+    public $selectedName;
+
+    public function execute($type =null , $fileName = null){
+        $command = explode('-' , $type);
+
+        //$this->setType($command[0]);
+        $this->setMMC($command[1]);
+        $this->setName($fileName);
+
+        if($command[0] == 'make'){
+            if($command[1] == 'model'){
+                $this->makeModel($fileName);
+            }else if($command[1] == 'migration'){
+                $this->makeMigration($fileName);
+            }else if($command[1] == 'controller'){
+                $this->makeController($fileName);
+            }
+        }
+    }
+
+    public function rollback(){
+        $drop = new Drop();
+        echo 'das';
+        $drop->execute('drop-'.$this->getMMCType() , $this->getSelectedName());
+    }
+
+    /*public function setType($type){
+        $this->type = $type;
+    }*/
+
+    public function setMMC($mmcType){
+        $this->mmcType = $mmcType;
+    }
+
+    public function setName($selectedName){
+        $this->selectedName = $selectedName;
+    }
+
+    public function getSelectedName(){
+        return $this->selectedName;
+    }
+
+    /*public function getType(){
+        return $this->type;
+    }*/
+
+    public function getMMCType(){
+        return $this->mmcType;
+    }
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Add</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="pages/formType.js"></script>
+  <script type="text/javascript" src="pages/addProducts/addProducts.js"></script>
+</head>
+<body>
+   <!--header-->
+  <form id = "product_form"> 
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md col-sm-12">
+          <h4>Product Add</h4>
+        </div>
+        <div class="col-md-auto col-sm-12">
+          <button type="submit" value="submit">Save</button>
+          <button class="ml-md-3">
+            <a style="color: inherit;text-decoration: none;" href="http://localhost/scandiweb/listProducts">
+              Cancel
+            </a>
+          </button>
+        </div>
+      </div>
+      <hr class="mt-2 mb-3 hrColor">
+    </div>
+
+    <!--form-->
+    <div class="container">
+        <div class="form-group row">
+          <label for="sku" class="d-flex col-sm-2 col-form-label align-items-center">SKU</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="sku" name = "sku" placeholder="#sku">
+            <span style = "visibility: hidden; color:red">*please enter sku*</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="name" class="d-flex col-sm-2 col-form-label align-items-center">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" name = "name" placeholder="#name">
+            <span style = "visibility: hidden; color:red">*please enter name*</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="price" class="d-flex col-sm-2 col-form-label align-items-center">Price($)</label>
+          <div class="col-sm-10">
+            <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="#price">
+            <span style = "visibility: hidden; color:red">*please enter price*</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="productType" class="d-flex col-sm-2 align-items-center">Type Switcher</label>
+          <div class="col-sm-2">
+            <select class="form-control" id="productType">
+              <option id = "switch" value="none" selected disabled hidden>Type Switcher</option>
+              <span style = "visibility: hidden; color:red">*please choose one option*</span>
+              <option value="DVD">DVD</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Book">Book</option>
+            </select>
+          </div>
+        </div>
+
+      <!--DVD-->
+      <div id="dvd">
+        <div class="form-group row">
+          <label for="size" class="d-flex col-sm-2 col-form-label align-items-center">Size(MB)</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="size" name="size" placeholder="#size">
+            <span style = "visibility: hidden; color:red">*please enter size*</span>
+          </div>
+        </div>
+      </div>
+
+      <!--furniture-->
+      <div id="furniture">
+        <div class="form-group row">
+          <label for="height" class="d-flex col-sm-2 col-form-label align-items-center">Height(CM)</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="height" name = "height" placeholder="#Height">
+            <span style = "visibility: hidden; color:red">*please enter height*</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="width" class="d-flex col-sm-2 col-form-label align-items-center">Width(CM)</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="width" name="width" placeholder="#width">
+            <span style = "visibility: hidden; color:red">*please enter width*</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="length" class="d-flex col-sm-2 col-form-label align-items-center">Length(CM)</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="length" name = "length" placeholder="#length">
+            <span style = "visibility: hidden; color:red">*please enter length*</span>
+          </div>
+        </div>
+      </div>
+
+      <!--book-->
+      <div id="book">
+        <div class="form-group row">
+          <label for="weight" class="d-flex col-sm-2 col-form-label align-items-center">Weight(KG)</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="weight" name="weight" placeholder="#Weight">
+            <span style = "visibility: hidden; color:red">*please enter weight*</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</body>
+</html>

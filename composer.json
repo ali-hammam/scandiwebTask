@@ -1,0 +1,10 @@
+{
+  "autoload": {
+    "psr-4": {
+        "Nesc\\" : "Nesc/",
+        "Model\\" : "Model/",
+        "stratiges\\":"stratiges/",
+        "pages\\":"pages/"
+    }
+  }
+}
