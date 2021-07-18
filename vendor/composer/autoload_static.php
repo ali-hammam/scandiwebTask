@@ -7,10 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit88654a14a040c48125a554352f99c24a
 {
     public static $prefixLengthsPsr4 = array (
-        's' => 
-        array (
-            'stratiges\\' => 10,
-        ),
         'p' => 
         array (
             'pages\\' => 6,
@@ -26,10 +22,6 @@ class ComposerStaticInit88654a14a040c48125a554352f99c24a
     );
 
     public static $prefixDirsPsr4 = array (
-        'stratiges\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/stratiges',
-        ),
         'pages\\' => 
         array (
             0 => __DIR__ . '/../..' . '/pages',
@@ -45,10 +37,6 @@ class ComposerStaticInit88654a14a040c48125a554352f99c24a
     );
 
     public static $classMap = array (
-        'Model\\Item' => __DIR__ . '/../..' . '/Model/Item.php',
-        'Model\\Order' => __DIR__ . '/../..' . '/Model/Order.php',
-        'Model\\Person' => __DIR__ . '/../..' . '/Model/Person.php',
-        'Model\\PhoneNumber' => __DIR__ . '/../..' . '/Model/PhoneNumber.php',
         'Model\\product' => __DIR__ . '/../..' . '/Model/product.php',
         'Model\\productType' => __DIR__ . '/../..' . '/Model/productType.php',
         'Nesc\\DB\\Model\\Model' => __DIR__ . '/../..' . '/Nesc/DB/Model/Model.php',
@@ -58,13 +46,6 @@ class ComposerStaticInit88654a14a040c48125a554352f99c24a
         'Nesc\\Router\\Route' => __DIR__ . '/../..' . '/Nesc/Router/Route.php',
         'Nesc\\Router\\Router' => __DIR__ . '/../..' . '/Nesc/Router/Router.php',
         'Nesc\\Router\\RouterTemplate' => __DIR__ . '/../..' . '/Nesc/Router/RouterTemplate.php',
-        'stratiges\\bookStrategy' => __DIR__ . '/../..' . '/stratiges/bookStrategy.php',
-        'stratiges\\cardCreation' => __DIR__ . '/../..' . '/stratiges/cardCreation.php',
-        'stratiges\\dvdStrategy' => __DIR__ . '/../..' . '/stratiges/dvdStrategy.php',
-        'stratiges\\furnitureStrategy' => __DIR__ . '/../..' . '/stratiges/furnitureStrategy.php',
-        'stratiges\\listProducts' => __DIR__ . '/../..' . '/stratiges/listProducts.php',
-        'stratiges\\productSkeleton' => __DIR__ . '/../..' . '/stratiges/productSkeleton.php',
-        'stratiges\\strategyFactory' => __DIR__ . '/../..' . '/stratiges/strategyFactory.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

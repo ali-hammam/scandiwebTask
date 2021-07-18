@@ -1,8 +1,5 @@
 <?php
-
-
 namespace Nesc\Facade;
-
 
 abstract class Facade
 {

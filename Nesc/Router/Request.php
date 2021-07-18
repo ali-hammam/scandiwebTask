@@ -1,8 +1,5 @@
 <?php
-
-
 namespace Nesc\Router;
-
 
 class Request {
 

@@ -1,10 +1,8 @@
 <?php
-// include '../config.php';
 
 trait Helpers {
 
     public function loadControllerFile($controllerFile){
-        //require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/Controller/' .$controllerFile.'.php');
         require_once (ROOT.'/Controller/' .$controllerFile.'.php');
     }
 

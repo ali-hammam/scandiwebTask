@@ -22,8 +22,6 @@ class productController {
         $dataCounter++;
       }
     }
-  
-
     echo json_encode([
       'status' => '200',
       "data" => $data,
@@ -57,44 +55,22 @@ class productController {
     ]);
   }
 
-  public function isDvd(){
-    return array_key_exists('size' , Request::getData());
+  public function formatValue(){
+    $obj = Request::getData();
+    $json;    
+    foreach($this->formDetails() as $detail){
+      if(!is_null($obj[$detail])){
+        $json[$detail] = $obj[$detail];
+      }
+    }
+    return "'".json_encode([$json])."'";
   }
 
-  public function isBook(){
-    return array_key_exists('weight' , Request::getData());
-  }
-
-  public function isFurniture(){
-    return Request::get('height') != null;
+  public function formDetails(){
+    return ['size' , 'weight' , 'height' , 'width' , 'length'];
   }
 
   public function columns(){
     return ['productstype_id', 'sku' , 'name' , 'price' , 'details'];
-  }
-
-  private function typeId($type){
-    $this->productType = new ProductType();
-    $id = $this->productType->select(['id'] , 'productstype')
-                ->where("name", "=", "'".$type."'")
-                ->runSelect()
-                ->get();
-    return $id[0]['id'];
-  }
-
-  public function formatValue(){
-    $obj = Request::getData();
-    $json;
-    if($this->isDvd()){
-      $json['size'] = $obj['size'];   
-    }else if($this->isBook()){
-      $json['weight'] = $obj['weight'];
-    }elseif($this->isFurniture()){
-      $json['height'] = $obj['height'];
-      $json['width'] = $obj['width'];
-      $json['length'] = $obj['length'];
-    }
-
-    return "'".json_encode([$json])."'";
   }
 }

@@ -1,10 +1,5 @@
 <?php
-
 namespace DB\Table\Facades;
-/*require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/Nesc/DB/Table/TableBluePrint.php');
-require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/Nesc/Facade/Facade.php');*/
-
-include_once 'config.php';
 require_once (ROOT.'/Nesc/DB/Table/TableBluePrint.php');
 require_once (ROOT.'/Nesc/Facade/Facade.php');
 use DB\Table\TableBluePrint;

@@ -27,7 +27,7 @@ $(function(){
         type: 'POST',
         data: {'proudcts_id' : deleteCard()},
         success: function (result) {
-          console.log(result);
+          
         },
         error: function (data, status) {
           console.log(data, status)

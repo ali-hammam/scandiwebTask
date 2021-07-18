@@ -2,7 +2,6 @@
 
 namespace DB\Table;
 use DB\DBConnection;
-/*require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/Nesc/DB/DBConnection.php');*/
 include_once 'config.php';
 require_once (ROOT.'/nesc/DB/DBConnection.php');
 

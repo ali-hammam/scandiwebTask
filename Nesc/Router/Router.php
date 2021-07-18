@@ -1,10 +1,8 @@
 <?php
-
 namespace Nesc\Router;
 require_once ('RouterTemplate.php');
 require_once ('Request.php');
 include __DIR__.'/Traits/ControllerParser.php';
-// include '../config.php';
 use Controller\Controller;
 use Traits\ControllerParser;
 
@@ -20,8 +18,7 @@ class Router extends RouterTemplate
 
     public function requestMethodChecker($uri , $callback , $methodName){
         $incomingRequestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-        //echo $_SERVER['REQUEST_URI'];
-        if (/* '/scandiweb' */ $uri == $this->uri() && $methodName === $incomingRequestMethod) {
+        if ($uri == $this->uri() && $methodName === $incomingRequestMethod) {
             $this->urlFound = 1;
             $this->requestMethod = $methodName;
             $this->runCallback($callback);
@@ -42,7 +39,6 @@ class Router extends RouterTemplate
     public function routeToController($value){
         $controllerFile = $this->ControllerFile($value);
         $methodName = $this->methodName($value);
-        //$data = json_decode(file_get_contents('php://input'), true);
         $this->requestMethod !== 'post' ?  : Request::setData($_POST);
 
         $controller = new Controller();

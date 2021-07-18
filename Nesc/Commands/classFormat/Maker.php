@@ -12,14 +12,11 @@ use makeCommands;
 class Maker implements \Commands\Command
 {
     use makeCommands;
-    //public $type; // make-drop
     public $mmcType; //model migration controller
     public $selectedName;
 
     public function execute($type =null , $fileName = null){
         $command = explode('-' , $type);
-
-        //$this->setType($command[0]);
         $this->setMMC($command[1]);
         $this->setName($fileName);
 
@@ -42,10 +39,6 @@ class Maker implements \Commands\Command
         $drop->execute('drop-'.$this->getMMCType() , $this->getSelectedName());
     }
 
-    /*public function setType($type){
-        $this->type = $type;
-    }*/
-
     public function setMMC($mmcType){
         $this->mmcType = $mmcType;
     }
@@ -57,10 +50,6 @@ class Maker implements \Commands\Command
     public function getSelectedName(){
         return $this->selectedName;
     }
-
-    /*public function getType(){
-        return $this->type;
-    }*/
 
     public function getMMCType(){
         return $this->mmcType;

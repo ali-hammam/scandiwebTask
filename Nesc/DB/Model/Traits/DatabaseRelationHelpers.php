@@ -1,8 +1,5 @@
 <?php
-
-
 namespace DB\Model\Traits;
-
 
 trait DatabaseRelationHelpers{
     //gather all the desired object format into one array

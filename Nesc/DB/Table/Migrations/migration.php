@@ -1,7 +1,5 @@
 <?php
 namespace DB\Table\Migrations;
-/*require_once ($_SERVER['DOCUMENT_ROOT'].'/nesc/Nesc/DB/DBConnection.php');*/
-include_once 'config.php';
 require_once (ROOT.'/Nesc/DB/DBConnection.php');
 use DB\DBConnection;
 

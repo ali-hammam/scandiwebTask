@@ -28,8 +28,6 @@ class migrate implements Command
         }
     }
 
-    
-
     public function setMMC($mmcType){
         $this->mmcType = $mmcType;
     }
