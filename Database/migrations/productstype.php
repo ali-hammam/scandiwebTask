@@ -1,36 +1,31 @@
 <?php
-
-
 namespace Database\migrations;
 use DB\Table\Facades\ColumnPropertyFacade;
 use DB\Table\Facades\Table;
 use DB\Table\Migrations\migration;
-require_once 'config.php';
+
+include_once 'config.php';
 require_once (ROOT.'/nesc/DB/Table/Migrations/migration.php');
 require_once (ROOT.'/nesc/DB/Table/Facades/ColumnPropertyFacade.php');
 require_once (ROOT.'/nesc/DB/Table/Facades/Table.php');
-
-class items extends migration
+class productstype extends migration
 {
-    public function up()
-    {
+    public function up(){
         Table::create($this->className , function (){
-
             $id = ColumnPropertyFacade::SetColumnBase('id')
-                ->Number()
-                ->primaryKey()
-                ->getColumnProperty();
+                            ->Number()
+                            ->primaryKey()
+                            ->getColumnProperty();
+            
+            $name = ColumnPropertyFacade::SetColumnBase('name')
+                            ->String(50)
+                            ->getColumnProperty();
 
-            $itemName = ColumnPropertyFacade::SetColumnBase('itemName')
-                ->String(20)
-                ->getColumnProperty();
-
-            return [$id, $itemName];
+            return[$id , $name];
         });
     }
 
-    public function down()
-    {
+    public function down(){
         Table::drop($this->className);
     }
 }

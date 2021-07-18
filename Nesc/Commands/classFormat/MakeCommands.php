@@ -14,6 +14,15 @@ trait makeCommands {
     public function makeController($controllerName){
         $this->create('Controller' , $controllerName , 'controllerFormat');
     }
+    
+    public function makeMigrate($controllerName){
+        require_once ROOT. '/Database/migrations/' . $controllerName.'.php';
+        $migrationName = $controllerName;
+        $path = '\Database\migrations\\';
+        $classPath = $path . $migrationName;
+        $migrationObj = new $classPath();
+        $migrationObj->run('create');   
+    }
 
     public function create($dir , $filename , $txtFile){
         if(is_writable ($dir."/".$filename.".php")){

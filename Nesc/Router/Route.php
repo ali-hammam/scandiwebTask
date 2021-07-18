@@ -1,7 +1,7 @@
 <?php
 namespace Nesc\Router;
 //require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/Nesc/Facade/Facade.php');
-include '../config.php';
+// include '../../config.php';
 require_once (ROOT.'Nesc/Facade/Facade.php');
 require_once ('Router.php');
 use Nesc\Facade\Facade;

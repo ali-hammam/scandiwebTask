@@ -32,4 +32,14 @@ trait TableDataTypes
         return $this;
     }
 
+    public function Float(){
+        $this->columnProperty = $this->columnProperty.' FLOAT ';
+        return $this;
+    }
+
+    public function Json(){
+        $this->columnProperty = $this->columnProperty.' JSON ';
+        return $this;
+    }
+
 }

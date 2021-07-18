@@ -8,7 +8,7 @@ const productTypes = {
 
 $(function(){
       $.ajax({
-        url: 'http://localhost/scandiweb/displayProducts',
+        url: 'http://localhost/displayProducts',
         type: "GET",
         success: function (result) {
            
@@ -23,7 +23,7 @@ $(function(){
 
     $('#delete').on('click' , ()=>{
       $.ajax({
-        url: 'http://localhost/scandiweb/deleteProducts',
+        url: 'http://localhost/deleteProducts',
         type: 'POST',
         data: {'proudcts_id' : deleteCard()},
         success: function (result) {

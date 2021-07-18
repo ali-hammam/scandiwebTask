@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 use \stratiges\listProducts;
 use \Nesc\Router\Request;
 use \Model\ProductType;
@@ -9,10 +10,8 @@ class productController {
   private $productType;
 
   public function display(){
-    /* $products = new listProducts();
-    $products->run(); */
-    $products = new productType;
-    $productList = $products->with('products' , 'productstype_id'); 
+    $productType = new productType;
+    $productList = $productType->with('products' , 'productstype_id'); 
     $temp = [];
     $data = [];
     $dataCounter = 0;

@@ -1,9 +1,9 @@
 <?php
 namespace Nesc\Router;
 //require ($_SERVER['DOCUMENT_ROOT'].'/Nesc/Nesc/Controller/Controller.php');
-include '../config.php';
+// include '../config.php';
 require_once (ROOT.'/Nesc/Controller/Controller.php');
-include __DIR__ . '\Traits\Errors.php';
+require_once (ROOT.'/Nesc/Router/Traits/Errors.php');
 use Traits\Errors;
 
 abstract class RouterTemplate{

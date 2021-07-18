@@ -4,7 +4,7 @@ namespace Nesc\Router;
 require_once ('RouterTemplate.php');
 require_once ('Request.php');
 include __DIR__.'/Traits/ControllerParser.php';
-include '../config.php';
+// include '../config.php';
 use Controller\Controller;
 use Traits\ControllerParser;
 
@@ -20,7 +20,8 @@ class Router extends RouterTemplate
 
     public function requestMethodChecker($uri , $callback , $methodName){
         $incomingRequestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-        if ('/scandiweb' . $uri == $this->uri() && $methodName === $incomingRequestMethod) {
+        //echo $_SERVER['REQUEST_URI'];
+        if (/* '/scandiweb' */ $uri == $this->uri() && $methodName === $incomingRequestMethod) {
             $this->urlFound = 1;
             $this->requestMethod = $methodName;
             $this->runCallback($callback);
@@ -28,7 +29,7 @@ class Router extends RouterTemplate
     }
 
     public function viewChecker($uri , $path){
-        if ('/scandiweb' . $uri == $this->uri()) {
+        if ($uri == $this->uri()) {
             $this->urlFound = 1;
             return include ROOT .$path;
         }

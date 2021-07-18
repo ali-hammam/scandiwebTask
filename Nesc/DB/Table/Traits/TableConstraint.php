@@ -9,7 +9,6 @@ trait TableConstraint
 
     public function NotNUll(){
         $this->columnProperty = $this->columnProperty.' NOT NULL';
-        echo $this->columnProperty;
         return $this;
     }
 

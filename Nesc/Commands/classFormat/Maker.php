@@ -30,6 +30,8 @@ class Maker implements \Commands\Command
                 $this->makeMigration($fileName);
             }else if($command[1] == 'controller'){
                 $this->makeController($fileName);
+            }else if($command[1] == 'migrate'){
+                $this->makeMigrate($fileName);
             }
         }
     }

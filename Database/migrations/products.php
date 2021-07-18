@@ -1,48 +1,53 @@
 <?php
-
-
 namespace Database\migrations;
 use DB\Table\Facades\ColumnPropertyFacade;
 use DB\Table\Facades\Table;
 use DB\Table\Migrations\migration;
 
-/*require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/nesc/DB/Table/Migrations/migration.php');
-require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/nesc/DB/Table/Facades/ColumnPropertyFacade.php');
-require_once ($_SERVER['DOCUMENT_ROOT'].'/Nesc/nesc/DB/Table/Facades/Table.php');*/
 include_once 'config.php';
 require_once (ROOT.'/nesc/DB/Table/Migrations/migration.php');
 require_once (ROOT.'/nesc/DB/Table/Facades/ColumnPropertyFacade.php');
 require_once (ROOT.'/nesc/DB/Table/Facades/Table.php');
 
-class orders_items extends migration
+class products extends migration
 {
-
     public function up(){
         Table::create($this->className , function (){
-
             $id = ColumnPropertyFacade::SetColumnBase('id')
                 ->Number()
                 ->primaryKey()
                 ->getColumnProperty();
 
-            $ordersId = ColumnPropertyFacade::SetColumnBase('ordersId')
+            $productstype_id = ColumnPropertyFacade::SetColumnBase('productstype_id')
                 ->Number()
                 ->unsigned()
+                ->NotNUll()
                 ->getColumnProperty();
 
-            $itemId = ColumnPropertyFacade::SetColumnBase('itemsId')
-                ->Number()
-                ->unsigned()
+            $sku = ColumnPropertyFacade::SetColumnBase('sku')
+                ->String(50)
+                ->NotNUll()
                 ->getColumnProperty();
 
-            $ordersIdConstraint = ColumnPropertyFacade::foreignKey('ordersId')
+            $name = ColumnPropertyFacade::SetColumnBase('name')
+                ->String(50)
+                ->NotNUll()
                 ->getColumnProperty();
 
-            $itemIdConstraint = ColumnPropertyFacade::foreignKey('itemsId')
+            $price = ColumnPropertyFacade::SetColumnBase('price')
+                ->Float()
+                ->NotNUll()
                 ->getColumnProperty();
 
-            return [$id , $ordersId , $itemId , $ordersIdConstraint , $itemIdConstraint];
+            $details = ColumnPropertyFacade::SetColumnBase('details')
+                ->Json(50)
+                ->NotNUll()
+                ->getColumnProperty();
 
+            $foreignKey = ColumnPropertyFacade::foreignKey('productstype_id' , 'productstype' , 'id')
+                ->getColumnProperty();
+
+            return [$id, $productstype_id , $sku , $name , $price , $details , $foreignKey];
         });
     }
 

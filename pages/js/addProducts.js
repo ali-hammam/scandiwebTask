@@ -32,7 +32,7 @@ $(function(){
         }
 
         $.ajax({
-            url : 'http://localhost/scandiweb/displayProducts',
+            url : 'http://localhost/displayProducts',
             method: 'POST',
             data: dataObj(),
             success: function (data, status) {
@@ -42,7 +42,7 @@ $(function(){
                 console.log(data, status)
             }
         }).then(response => {
-             window.location.href = "http://localhost/scandiweb/listProducts"
+             window.location.href = "http://localhost/"
         })
 
         return false;

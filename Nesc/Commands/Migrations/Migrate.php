@@ -23,10 +23,12 @@ class migrate implements Command
                 $path = '\Database\migrations\\';
                 $classPath = $path . $migrationName;
                 $migrationObj = new $classPath();
-                $migrationObj->run('create');
+                $migrationObj->run('create');   
             }
         }
     }
+
+    
 
     public function setMMC($mmcType){
         $this->mmcType = $mmcType;
