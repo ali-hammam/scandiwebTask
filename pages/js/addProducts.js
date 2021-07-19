@@ -1,6 +1,7 @@
  const dvdAttributes = ['size'];
  const bookAttributes = ['weight'];
  const furnitureAttributes = ['height' , 'width' , 'length'];
+ const fixedAttributes = ['sku' , 'name' , 'price'];
  const productTypes = {
      'DVD': 1,
      'Furniture': 2,
@@ -13,15 +14,9 @@ $(function(){
   $('#book').hide();
   
   $("#productType").change(function(event){
-      let temp = event.target.value;
-      if(temp === 'Type Switcher'){
-        $('#dvd').hide();
-        $('#furniture').hide();
-        $('#book').hide();
-      }else{
+        let temp = event.target.value;
         var p = new window.formType[temp]();
         p.popUp();
-      }
    });
 
    $('#product_form').submit(function(event) {
@@ -35,14 +30,11 @@ $(function(){
             url : 'http://localhost/displayProducts',
             method: 'POST',
             data: dataObj(),
-            success: function (data, status) {
-               
-            },
             error: function (data, status) {
                 console.log(data, status)
             }
-        }).then(response => {
-             window.location.href = "http://localhost/"
+        }).then(() => {
+            window.location.href = "http://localhost/";
         })
 
         return false;
@@ -51,10 +43,9 @@ $(function(){
 
 function validateForm(){
     let err = 0;
-    let dropDownVal = $('#productType').val();
-    const types = ['sku' , 'name' , 'price'];
+    let productTypeDropDownName = $('#productType').val();
 
-    types.forEach(function(type){
+    fixedAttributes.forEach(function(type){
         selector = $('#'+type).val();
         if(!selector){
             err = errorMsg(type);
@@ -62,15 +53,8 @@ function validateForm(){
             err = successMsg(type);
         }
     });
-
-
-    if(dropDownVal === 'Type Switcher'){
-        err = errorMsg('switch');
-    }else{
-        var p = new window.formType[dropDownVal]();;
-        err = p.validateInputs(err);
-    }
-
+    
+    err = getProductTypeClassInstance(productTypeDropDownName).validateInputs(err);
     return err;
 }
 
@@ -100,15 +84,21 @@ function successMsg(type){
 }
 
 function dataObj(){
-    let dropDownVal = $('#productType').val();
-    let sk = $('#sku').val();
-    let nam = $('#name').val();
-    let pric = $('#price').val();
-    let obj = {sku: sk , name: nam , price : pric};
-
-    var p = new window.formType[dropDownVal]();
-    p.dataObj(obj);
+    let productTypeDropDownName = $('#productType').val();
+    const obj = {};
     
-    obj['productTypeId'] = productTypes[dropDownVal];
+    fixedAttributes.forEach(type => {
+        obj[type] = $('#'+type).val();
+    });
+    
+    obj['details'] = getProductTypeClassInstance(productTypeDropDownName).dataObj();
+    obj['productTypeId'] = productTypes[productTypeDropDownName];
+    console.log(obj);
     return obj;
 }
+
+function getProductTypeClassInstance(productTypeName){
+    let productTypeClass = window.formType[productTypeName];
+    return new productTypeClass();
+}
+

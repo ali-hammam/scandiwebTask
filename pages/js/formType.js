@@ -10,12 +10,13 @@ function DVD () {
       hideFurniture();
   }
 
-  this.dataObj = function(obj){
-      obj['size'] = $('#size').val();
+  this.dataObj = function(){
+    return {
+      size: $('#size').val()
+    };
   }
 
   this.cardInfo = function(details){
-    console.log(`${details['size']}`);
     return `<p class="card-text text-center">size: `+ `${details['size']}` +`MB`;
   }
 
@@ -33,8 +34,10 @@ function Book() {
       hideFurniture();
   }
 
-  this.dataObj = function(obj){
-      obj['weight'] = $('#weight').val();
+  this.dataObj = function(){
+      return {
+        weight: $('#weight').val()
+      };
   }
 
   this.cardInfo = function(details){
@@ -54,10 +57,12 @@ function Furniture(){
       hideBook();
   }
 
-  this.dataObj = function(obj){
-      obj['height'] = $('#height').val();
-      obj['width'] = $('#width').val();
-      obj['length'] = $('#length').val();
+  this.dataObj = function(){
+    return {
+      height : $('#height').val(),
+      width :$('#width').val(),
+      length : $('#length').val()
+    };
   }
 
   this.cardInfo = function(details){

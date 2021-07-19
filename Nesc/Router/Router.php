@@ -17,6 +17,7 @@ class Router extends RouterTemplate
     }
 
     public function requestMethodChecker($uri , $callback , $methodName){
+
         $incomingRequestMethod = strtolower($_SERVER['REQUEST_METHOD']);
         if ($uri == $this->uri() && $methodName === $incomingRequestMethod) {
             $this->urlFound = 1;

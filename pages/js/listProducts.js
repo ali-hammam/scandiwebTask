@@ -1,4 +1,4 @@
-var glob;
+var products;
 const productTypes = {
   1: 'DVD',
   2: 'Furniture',
@@ -10,15 +10,13 @@ $(function(){
       $.ajax({
         url: 'http://localhost/displayProducts',
         type: "GET",
-        success: function (result) {
-           
-        },
         error: function () {
              console.log("error");
         }
       }).then(response => {
-        glob = JSON.parse(response);
-        formData(JSON.parse(response));
+        let parsedResponse = JSON.parse(response);
+        products = parsedResponse['data'];
+        formData(products);
       });
 
     $('#delete').on('click' , ()=>{
@@ -26,23 +24,19 @@ $(function(){
         url: 'http://localhost/deleteProducts',
         type: 'POST',
         data: {'proudcts_id' : deleteCard()},
-        success: function (result) {
-          
-        },
         error: function (data, status) {
           console.log(data, status)
         }
-      }).then(response => {
-        formData(glob);
+      }).then(() => {
+        formData(products);
       });
     });
 });
 
 
 
-function formData(resp){
-  let data = resp["data"];
-  document.getElementById('posts').innerHTML = '';
+function formData(data){
+  document.getElementById('cards').innerHTML = '';
   
   for(let i = 0; i < data.length; i++){
     var div = document.createElement('div');
@@ -79,43 +73,41 @@ function formData(resp){
         </div>
         `;
     div.innerHTML = output;
-    document.getElementById('posts').appendChild(div);
+    document.getElementById('cards').appendChild(div);
   }
 }
 
-  function cardInitialization(id){
-    return  `
-    <div class="card bg-light mb-3" style="max-width: 18rem;">
-      <div class="card-body">
-        <div class="col-12">
-          <input type="checkbox" class="form-check-input delete-checkbox" id="defaultCheck1" value = "${id}">
-        </div>
-        <div class="p-1">`;
-  }
+function cardInitialization(id){
+  return  `
+  <div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-body">
+      <div class="col-12">
+        <input type="checkbox" class="form-check-input delete-checkbox" id="defaultCheck1" value = "${id}">
+      </div>
+      <div class="p-1">`;
+}
 
 function deleteCard(){
-  var selected = new Array();
-  var tblFruits = document.getElementById("posts");
-  var chks = tblFruits.getElementsByTagName("INPUT");
-  for (var i = 0; i < chks.length; i++) {
-    if (chks[i].checked) {
-      selected.push(chks[i].value);
+  let selected = new Array();
+  let cards = document.getElementById("cards");
+  let inputs = cards.getElementsByTagName("INPUT");
+  for (let i = 0; i < inputs.length; i++) {
+     if (inputs[i].checked) {
+      selected.push(inputs[i].value); 
     }
-  }
+   }
 
-  deleteFromGlob(selected);
+  deleteFromProducts(selected);
   return  selected;
 }
 
-function deleteFromGlob(selected){
-  let data = glob['data'];
+function deleteFromProducts(selected){
   for(let i = 0; i < selected.length; i++){
-    for(let j = 0; j < data.length; j++){
-      if(selected[i] == data[j]['products_id']){
-        data.splice(j , 1);
+    for(let j = 0; j < products.length; j++){
+      if(selected[i] == products[j]['products_id']){
+        products.splice(j , 1);
       }
     }
   }
-  glob['data'] = data;
 }
 

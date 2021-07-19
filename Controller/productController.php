@@ -11,28 +11,22 @@ class productController {
 
   public function display(){
     $productType = new productType;
-    $productList = $productType->with('products' , 'productstype_id'); 
-    $temp = [];
-    $data = [];
-    $dataCounter = 0;
-    for($i = 0; $i < sizeof($productList); $i++){
-      $temp[$i] = $productList[$i]['products'];
-      for($j = 0; $j < sizeof($temp[$i]); $j++){
-        $data[$dataCounter] = $temp[$i][$j];
-        $dataCounter++;
-      }
-    }
+    $productTypesWithProducts = $productType->with('products' , 'productstype_id'); 
+    
+    $products = array_map(function ($productType) {
+      return $productType['products'];
+    }, $productTypesWithProducts);
+
     echo json_encode([
       'status' => '200',
-      "data" => $data,
+      "data" => array_merge(...array_filter($products)), //array_filter to remove null and empty arrays
     ]);
   }
 
   public function delete(){
-   $object = Request::getData();
-   $products = new product();
-   $products_id = $object["proudcts_id"];
-   $products->massDelete($products_id)->run();
+   $products_id = Request::get("proudcts_id");
+   $product = new product();
+   $product->massDelete($products_id)->run();
 
     echo json_encode([
       'status' => '200',
@@ -41,36 +35,28 @@ class productController {
   }
 
   public function add(){
-    $id = '';
-    $sku = "'".Request::get('sku')."'";
-    $name = "'".Request::get('name')."'";
+    $sku = $this->stringify(Request::get('sku'));
+    $name =$this->stringify(Request::get('name'));
     $price = Request::get('price');
     $productTypeId = Request::get('productTypeId');
+    $details = $this->getProductDetailsFromRequest();
+    
     $product = new product();
-
-    $product->insert($this->columns() , [$productTypeId , $sku , $name , $price , $this->formatValue()])->run();
+    $product->insert($product->fillable, [$productTypeId, $sku, $name, $price, $details])
+      ->run();
+    
     echo json_encode([
       'status' => '204',
       "data" => Request::getData()
     ]);
   }
 
-  public function formatValue(){
-    $obj = Request::getData();
-    $json;    
-    foreach($this->formDetails() as $detail){
-      if(!is_null($obj[$detail])){
-        $json[$detail] = $obj[$detail];
-      }
-    }
-    return "'".json_encode([$json])."'";
+  private function getProductDetailsFromRequest() {
+    $requestDetails = Request::get('details');
+    return $this->stringify(json_encode([$requestDetails]));
   }
 
-  public function formDetails(){
-    return ['size' , 'weight' , 'height' , 'width' , 'length'];
-  }
-
-  public function columns(){
-    return ['productstype_id', 'sku' , 'name' , 'price' , 'details'];
+  private function stringify($val){
+    return "'".$val."'";
   }
 }
